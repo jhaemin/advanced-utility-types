@@ -64,3 +64,29 @@ type ValueByKeyPathArr<Obj, KeyPathArr> = KeyPathArr extends [
 type ValueByKeyPathStr<Obj, Str> = Str extends string
   ? ValueByKeyPathArr<Obj, Split<Str>>
   : never
+
+/**
+ * Only allow just one type from union of string
+ * as an object's key.
+ *
+ * Example
+ * type Key = 'cherry' | 'pie'
+ *
+ * const obj: UniqueKey<Key> = {
+ *   cherry: '',    <- not allowed
+ *   pie: '',       <- not allowed
+ * }
+ *
+ * // Allowed
+ * const obj: UniqueKey<Key> = {
+ *   cherry: '',
+ * }
+ *
+ * // Allowed
+ * const obj: UniqueKey<Key> = {
+ *   pie: '',
+ * }
+ */
+type UniqueKey<Key extends string, Value = any> = {
+  [P in Key]: Record<P, Value> & Partial<Record<Exclude<Key, P>, never>>
+}[Key]
