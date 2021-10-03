@@ -27,7 +27,7 @@ type RecursiveObject<T> = T extends Date ? never : T extends object ? T : never
 type StringValues<TModel> = {
   [Key in keyof TModel]?: TModel[Key] extends RecursiveObject<TModel[Key]>
     ? StringValues<TModel[Key]>
-    : string
+    : string // Change this type whatever you want
 }
 
 /**
