@@ -11,6 +11,9 @@ type RecursiveKeyOf<Obj extends Record<string, any>> = {
     : `${Key}`
 }[keyof Obj & (string | number)]
 
+/**
+ * Make all nested object properties optional
+ */
 type RecursivePartial<T> = {
   [P in keyof T]?: T[P] extends (infer U)[]
     ? RecursivePartial<U>[]
