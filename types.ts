@@ -111,12 +111,6 @@ type DifferenceWithNever<A, B> = {
     : A[K]
 }
 
-// type NNN<O extends object, T extends keyof O> = T extends infer TT ? TT extends keyof O ? O[TT] extends infer OT
-//   ? OT extends string
-//     ? never
-//     : Record<T, OT>
-//   : never : never : never
-
 /**
  * Extract a union of key string with the given type.
  * ex)
