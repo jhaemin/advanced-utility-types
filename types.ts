@@ -1,3 +1,5 @@
+import type { DeepOmit } from 'ts-essentials'
+
 /**
  * { a: { b: { c: string } } }
  *
@@ -98,9 +100,9 @@ type UniqueKey<Key extends string, Value = any> = {
  * Exclude nested
  */
 type Difference<A, B> = {
-  [K in keyof A]?: K extends keyof B
-    ? A[K] extends Record<string, any>
-      ? B[K] extends Record<string, any>
+  [K in keyof A]: K extends keyof B
+    ? A[K] extends object
+      ? B[K] extends object
         ? Difference<A[K], B[K]>
         : A[K]
       : A[K] extends B[K]
@@ -108,3 +110,71 @@ type Difference<A, B> = {
       : A[K]
     : A[K]
 }
+
+type Diff<A, B> = {
+  [K in Exclude<keyof A, 'hello'>]: A[K]
+}
+
+type DDD = {
+  a: never
+}
+
+type DDK = keyof DDD
+
+type NN = '1' | '2' | '3'
+type ND = {
+  '1': string
+  '2': number
+  '3': boolean
+}
+
+// type NNN<O extends object, T extends keyof O> = T extends infer TT ? TT extends keyof O ? O[TT] extends infer OT
+//   ? OT extends string
+//     ? never
+//     : Record<T, OT>
+//   : never : never : never
+
+type ExtractOnlyTheKeysOfSpecificType<
+  Obj extends object,
+  T
+> = keyof Obj extends infer Key
+  ? Key extends keyof Obj
+    ? Obj[Key] extends T
+      ? never
+      : Key
+    : never
+  : never
+
+type SubObject<Obj extends object, Key extends keyof Obj> = {
+  [K in Key]: Obj[K]
+}
+
+type OmitType<Obj extends object, T> = SubObject<
+  Obj,
+  ExtractOnlyTheKeysOfSpecificType<Obj, T>
+>
+
+type A = {
+  hello: string
+  world?: {
+    my: number
+    name: number
+    is: number
+  }
+}
+
+type B = {
+  hello: string
+  world: {
+    is: number
+  }
+}
+
+const diff: OmitType<Difference<A, B>, never> = {}
+
+// const diff: DeepOmit<A, { hello: never }> = {
+//   world: {
+//     my: 3,
+//     name: 3,
+//   },
+// }
