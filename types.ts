@@ -93,3 +93,18 @@ type ValueByKeyPathStr<Obj, Str> = Str extends string
 type UniqueKey<Key extends string, Value = any> = {
   [P in Key]: Record<P, Value> & Partial<Record<Exclude<Key, P>, never>>
 }[Key]
+
+/**
+ * Exclude nested
+ */
+type Difference<A, B> = {
+  [K in keyof A]?: K extends keyof B
+    ? A[K] extends Record<string, any>
+      ? B[K] extends Record<string, any>
+        ? Difference<A[K], B[K]>
+        : A[K]
+      : A[K] extends B[K]
+      ? never
+      : A[K]
+    : A[K]
+}
