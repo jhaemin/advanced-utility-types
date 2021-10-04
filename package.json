@@ -1,0 +1,23 @@
+{
+  "name": "advanced-utility-types",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jhaemin/advanced-utility-types.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jhaemin/advanced-utility-types/issues"
+  },
+  "homepage": "https://github.com/jhaemin/advanced-utility-types#readme",
+  "devDependencies": {
+    "ts-essentials": "^9.0.0"
+  }
+}
