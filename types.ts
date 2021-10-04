@@ -111,19 +111,6 @@ type DifferenceWithNever<A, B> = {
     : A[K]
 }
 
-type DDD = {
-  a: never
-}
-
-type DDK = keyof DDD
-
-type NN = '1' | '2' | '3'
-type ND = {
-  '1': string
-  '2': number
-  '3': boolean
-}
-
 // type NNN<O extends object, T extends keyof O> = T extends infer TT ? TT extends keyof O ? O[TT] extends infer OT
 //   ? OT extends string
 //     ? never
