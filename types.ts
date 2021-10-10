@@ -25,7 +25,7 @@ type RecursiveKeyOf<Obj extends Record<string, any>> = {
     ? `${Key}`
     : Obj[Key] extends Record<string, any>
     ? `${Key}` | `${Key}.${RecursiveKeyOf<Obj[Key]>}`
-    : `${Key}`
+    : `${Key}` // Change it to `never` only get keys of objects
 }[keyof Obj & (string | number)]
 
 /**
