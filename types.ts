@@ -1,5 +1,10 @@
 import type { DeepOmit } from 'ts-essentials'
 
+interface FixedLengthArray<T extends any, L extends number> extends Array<T> {
+  0: T
+  length: L
+}
+
 export type UnionToIntersection<U> = (
   U extends any ? (k: U) => void : never
 ) extends (k: infer I) => void
