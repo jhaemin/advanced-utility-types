@@ -6,6 +6,10 @@ export type UnionToIntersection<U> = (
   ? I
   : never
 
+export type ArrayToUnion<A> = A extends [infer First, ...infer Rest]
+  ? First | ArrayToUnion<Rest>
+  : never
+
 /**
  * { a: { b: { c: string } } }
  *
