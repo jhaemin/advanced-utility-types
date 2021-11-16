@@ -1,4 +1,5 @@
-import type { DeepOmit } from 'ts-essentials'
+// `DeepOmit` from `ts-essentials` is for a comparison to my `DeepOmitType`.
+// import type { DeepOmit } from 'ts-essentials'
 
 interface FixedLengthArray<T extends any, L extends number> extends Array<T> {
   0: T
